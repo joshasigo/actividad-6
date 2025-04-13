@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  collection-service:
+    build:
+      context: ./services/collection-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    networks:
+      - rainwater-network
+
+  purification-service:
+    build:
+      context: ./services/purification-service
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    networks:
+      - rainwater-network
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - rainwater-network
+
+networks:
+  rainwater-network:
+    driver: bridge
